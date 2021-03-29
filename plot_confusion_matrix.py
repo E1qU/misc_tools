@@ -121,7 +121,7 @@ def plot_confusion_matrix(conf_mat,
     thresh = conf_mat.max() / 1.5 if normalize else conf_mat.max() / 2
     for i, j in itertools.product(range(conf_mat.shape[0]), range(conf_mat.shape[1])):
         if normalize:
-            plt.text(j, i, f"{conf_mat[i, j]:.{num_decimals}}",
+            plt.text(j, i, f"{conf_mat[i, j]:.{num_decimals}f}",
                      horizontalalignment="center",
                      color="white" if conf_mat[i, j] > thresh else "black", fontsize=boxtext_labelsize)
         else:
