@@ -31,7 +31,7 @@ def plot_confusion_matrix(conf_mat,
     
     """
     Author: Einari Vaaras, einari.vaaras@tuni.fi, Tampere Univerity
-    SPECOG, https://webpages.tuni.fi/specog/index.html
+    Speech and Cognition Research Group, https://webpages.tuni.fi/specog/index.html
     
     #####################################################################################
     Description: Plots a confusion matrix.
