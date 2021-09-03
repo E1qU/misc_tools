@@ -92,7 +92,7 @@ if __name__ == '__main__':
     model.add(Dense(32, activation='relu'))
     model.add(Dense(2, activation='relu'))
     
-    # Compile the model
+    # Compile and train the model
     model.compile(optimizer=Adam(learning_rate=1e-3), loss=UARLoss)
     model.fit(X_training, y_training, epochs=epochs, batch_size=batch_size)
     
