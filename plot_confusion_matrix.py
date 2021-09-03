@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+Author: Einari Vaaras, einari.vaaras@tuni.fi, Tampere Univerity
+Speech and Cognition Research Group, https://webpages.tuni.fi/specog/index.html
+
+"""
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
@@ -30,9 +37,6 @@ def plot_confusion_matrix(conf_mat,
                           figure_size=(8, 6)):
     
     """
-    Author: Einari Vaaras, einari.vaaras@tuni.fi, Tampere Univerity
-    Speech and Cognition Research Group, https://webpages.tuni.fi/specog/index.html
-    
     #####################################################################################
     Description: Plots a confusion matrix.
     #####################################################################################
