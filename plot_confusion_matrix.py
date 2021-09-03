@@ -41,6 +41,8 @@ def plot_confusion_matrix(conf_mat,
     Description: Plots a confusion matrix.
     #####################################################################################
     
+    Input parameters:
+    
     
     conf_mat: Confusion matrix in the format that sklearn.metrics.confusion_matrix produces.
     
