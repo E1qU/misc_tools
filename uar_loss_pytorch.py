@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Author: Einari Vaaras, einari.vaaras@tuni.fi, Tampere Univerity
+Author: Einari Vaaras, einari.vaaras@tuni.fi, Tampere University
 Speech and Cognition Research Group, https://webpages.tuni.fi/specog/index.html
 
 """
