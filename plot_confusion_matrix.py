@@ -17,24 +17,26 @@ from matplotlib import rc
 
 def plot_confusion_matrix(conf_mat,
                           target_names,
-                          title='Confusion matrix',
-                          titlesize=50,
-                          colormap='Reds',
-                          normalize=True,
-                          num_decimals=4,
-                          use_latex_font=True,
-                          use_colorbar=True,
-                          colorbar_labelsize=25,
-                          boxtext_labelsize=50,
-                          xlabel='Predicted label',
-                          xlabelsize=40,
-                          ylabel='True label',
-                          ylabelsize=40,
-                          xticks_rotation=0,
-                          xticks_fontsize=25,
-                          yticks_rotation=0,
-                          yticks_fontsize=25,
-                          figure_size=(8, 6)):
+                          title = 'Confusion matrix',
+                          titlesize = 50,
+                          colormap = 'Reds',
+                          normalize = True,
+                          num_decimals = 4,
+                          use_latex_font = True,
+                          use_colorbar = True,
+                          colorbar_labelsize = 25,
+                          boxtext_labelsize = 50,
+                          xlabel = 'Predicted label',
+                          xlabelsize = 40,
+                          ylabel = 'True label',
+                          ylabelsize = 40,
+                          xticks_rotation = 0,
+                          xticks_fontsize = 25,
+                          yticks_rotation = 0,
+                          yticks_fontsize = 25,
+                          box_aspect_ratio = 'equal',
+                          figure_padding = 1.08,
+                          figure_size = (8, 6)):
     
     """
     #####################################################################################
@@ -93,6 +95,14 @@ def plot_confusion_matrix(conf_mat,
     yticks_fontsize: Sets the font size of the tick labels for the y-axis, needs to be a positive integer or a 
                      positive float.
     
+    box_aspect_ratio: The ratio of the height and width of the boxes in the confusion matrix. Options:
+                      'equal': Boxes will be square (aspect ratio is 1).
+                      'auto': The aspect ratio is adjusted so that the data fits inside the boxes.
+                      float: A value < 1.0 will result in the width of the boxes being larger than the height, and
+                             a value > 1.0 will result in the height of the boxes being larger than the width.
+    
+    figure_padding: Sets the amount of padding around the figure, can be a float or an integer.
+    
     figure_size: The width and height of the figure in inches as a tuple, e.g. (4, 2).
     
     """
@@ -111,7 +121,7 @@ def plot_confusion_matrix(conf_mat,
         conf_mat = np.round(conf_mat.astype('float') / conf_mat.sum(axis=1)[:, np.newaxis], decimals=num_decimals)
 
     plt.figure(figsize=figure_size)
-    plt.imshow(conf_mat, interpolation='nearest', cmap=colormap)
+    plt.imshow(conf_mat, interpolation='nearest', cmap=colormap, aspect=box_aspect_ratio)
     plt.title(title, fontsize=titlesize)
 
     if target_names is not None:
@@ -127,19 +137,31 @@ def plot_confusion_matrix(conf_mat,
     thresh = conf_mat.max() / 1.5 if normalize else conf_mat.max() / 2
     for i, j in itertools.product(range(conf_mat.shape[0]), range(conf_mat.shape[1])):
         if normalize:
-            plt.text(j, i, f"{conf_mat[i, j]:.{num_decimals}f}",
-                     horizontalalignment="center",
-                     color="white" if conf_mat[i, j] > thresh else "black", fontsize=boxtext_labelsize)
+            plt.text(j, i, f'{conf_mat[i, j]:.{num_decimals}f}',
+                     horizontalalignment='center',
+                     verticalalignment='center',
+                     color='white' if conf_mat[i, j] > thresh else 'black', fontsize=boxtext_labelsize)
         else:
-            plt.text(j, i, "{:,}".format(conf_mat[i, j]),
-                     horizontalalignment="center",
-                     color="white" if conf_mat[i, j] > thresh else "black", fontsize=boxtext_labelsize)
+            plt.text(j, i, '{:,}'.format(conf_mat[i, j]),
+                     horizontalalignment='center',
+                     verticalalignment='center',
+                     color='white' if conf_mat[i, j] > thresh else 'black', fontsize=boxtext_labelsize)
 
 
-    plt.tight_layout()
+    plt.tight_layout(pad=figure_padding)
     plt.ylabel(ylabel, fontsize=ylabelsize)
     plt.xlabel(xlabel, fontsize=xlabelsize)
     plt.show()
 
 
+
+if __name__ == '__main__':
+    """
+    A simple example script to showcase how the function works.
+    
+    """
+    
+    example_confusion_matrix = np.array([[171, 82], [94, 145]])
+    plot_confusion_matrix(example_confusion_matrix, ['Class 1', 'Class 2'], num_decimals=2)
+    
     
